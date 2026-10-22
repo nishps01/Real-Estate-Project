@@ -1,0 +1,12 @@
+const r = require("express").Router();
+const c = require("../controllers/propertyController");
+const { auth, adminOnly } = require("../middleware/auth");
+r.get("/search", c.search);
+r.get("/featured", c.featured);
+r.get("/type/:type", c.byType);
+r.get("/:id", c.getById);
+r.get("/", c.getAll);
+r.post("/admin", auth, adminOnly, c.create);
+r.put("/admin/:id", auth, adminOnly, c.update);
+r.delete("/admin/:id", auth, adminOnly, c.remove);
+module.exports = r;
